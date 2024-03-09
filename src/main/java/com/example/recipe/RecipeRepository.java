@@ -1,9 +1,10 @@
-// Write your code here
 package com.example.recipe;
 
-import com.example.recipe.Recipe;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface RecipeRepository {
     ArrayList<Recipe> getRecipes();
 
@@ -14,5 +15,4 @@ public interface RecipeRepository {
     Recipe updateRecipe(int recipeId, Recipe recipe);
 
     void deleteRecipe(int recipeId);
-
 }

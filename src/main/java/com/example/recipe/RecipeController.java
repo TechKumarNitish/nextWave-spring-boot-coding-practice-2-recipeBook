@@ -9,29 +9,16 @@
 // Write your code here
 package com.example.recipe;
 
-import java.util.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import com.example.recipe.Recipe;
-import com.example.recipe.RecipeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-/**
- * RecipeController
- */
+import java.util.ArrayList;
+
 @RestController
 public class RecipeController {
 
-    RecipeService recipeService = new RecipeService();
-
-    @GetMapping("/")
-    public String welcome() {
-        return "welcome to Recipe.";
-    }
+    @Autowired
+    private RecipeService recipeService;
 
     @GetMapping("/recipes")
     public ArrayList<Recipe> getRecipes() {
@@ -39,22 +26,22 @@ public class RecipeController {
     }
 
     @GetMapping("/recipes/{recipeId}")
-    public Recipe getrRecipeById(@PathVariable("recipeId") int recipeId) {
+    public Recipe getRecipeById(@PathVariable int recipeId) {
         return recipeService.getRecipeById(recipeId);
     }
 
     @PostMapping("/recipes")
-    public Recipe addrRecipe(@RequestBody Recipe recipe) {
+    public Recipe addRecipe(@RequestBody Recipe recipe) {
         return recipeService.addRecipe(recipe);
     }
 
     @PutMapping("/recipes/{recipeId}")
-    public Recipe updateRecipe(@PathVariable("recipeId") int recipeId, @RequestBody Recipe recipe) {
+    public Recipe updateRecipe(@PathVariable int recipeId, @RequestBody Recipe recipe) {
         return recipeService.updateRecipe(recipeId, recipe);
     }
 
     @DeleteMapping("/recipes/{recipeId}")
-    public void deleteRecipe(@PathVariable("recipeId") int recipeId) {
+    public void deleteRecipe(@PathVariable int recipeId) {
         recipeService.deleteRecipe(recipeId);
     }
 }
